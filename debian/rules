@@ -17,6 +17,13 @@ override_dh_auto_install:
 	mv "$(DESTDIR)/usr/bin/notification-proxy-server" \
 	   "$(DESTDIR)/usr/bin/qubes-notification-proxy-server"
 	# dh-cargo defines substvars only to one subpackage, fix it
+	if ! [ -e debian/qubes-notification-agent.substvars ]; then \
+	    cp debian/qubes-notification-daemon.substvars \
+	        debian/qubes-notification-agent.substvars; \
+	elif ! [ -e debian/qubes-notification-daemon.substvars ]; then \
+	    cp debian/qubes-notification-agent.substvars \
+	        debian/qubes-notification-daemon.substvars; \
+	fi
 	cp debian/qubes-notification-daemon.substvars \
 		debian/qubes-notification-agent.substvars
 	install -d -- "$(DESTDIR)/etc/qubes-rpc/" "$(DESTDIR)$(SYSTEMDUSERDIR)" "$(DESTDIR)$(SYSTEMDUSERDIR)-preset"
