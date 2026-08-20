@@ -15,6 +15,7 @@ depends=(
 )
 makedepends=(
     cargo
+    qubes-vm-utils
 )
 provides=(notification-daemon)
 conflicts=(notification-daemon)
